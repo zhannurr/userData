@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="user-container">
+        <h1>
+            User Data Manager
+            <img src="image.png" alt="user-icon">
+        </h1>
+
+        <section class="user-add">
+            <form id="userForm">
+                <h2>Add New User</h2>
+                <div class="input-container">
+                    <input id="nameInput" type="text" placeholder="First Name" required>
+                    <input id="surnameInput" type="text" placeholder="Last Name" required>
+                    <input id="ageInput" type="number" placeholder="Age" required>
+                    <input id="emailInput" type="email" placeholder="Email" required>
+                    <button type="submit">+</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="user-search">
+            <h2>Search User by ID</h2>
+            <form id="search-user-form">
+                    <label for="search-user-id">User ID:</label>
+                    <input type="text" id="search-user-id" class="form-control" placeholder="Enter user ID" required>
+
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            <div id="search-result"></div>
+        </section>
+
+        <section class="user-list">
+            <div class="sorting">
+                <h2>User List</h2>
+                <select id="sort" onchange="sortUsers()">
+                    <option value="name">Sort by Name</option>
+                    <option value="age">Sort by Age</option>
+                </select>
+            </div>
+           
+
+            <div id="user-list"></div>
+        </section>
+
+      
+        
+    </div>
+</body>
+
+</html>
