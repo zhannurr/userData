@@ -1,51 +1,83 @@
-# To-Do List App 📝
+# 🚀 MongoDB CRUD Application
 
-This project is a simple web application for managing your daily tasks using MongoDB.
+## 📌 Project Overview
+This project is a simple web application that integrates **MongoDB** to store user data and provides **CRUD operations**:
 
-**Features:**
+✅ **Create**: Add new users via a form or API.
+✅ **Read**: Display user data on a webpage.
+✅ **Update**: Edit user information.
+✅ **Delete**: Remove users from the database.
 
-* **Task Management:**
-    * ✅ Create new tasks 
-    * 📋 View existing tasks
-    * ✏️ Edit task details (e.g., description, due date, priority)
-    * 🗑️ Delete tasks
+Additionally, the project includes **Search & Filtering** functionality for better data management. 🔍📊
 
-**Getting Started:**
+---
 
-1. **Prerequisites:**
-    * Node.js and npm (or yarn) installed 
-    * MongoDB installed and running 
-    * MongoDB Compass (optional, for easier database exploration)
+## 🛠️ Installation & Setup
 
-2. **Installation:**
-    * Clone this repository: `git clone git@github.com:zhannurr/toDoList.git`
-    * Navigate to the project directory: `cd toDoList`
-    * Install dependencies: `npm install` 
+### 1️⃣ Install MongoDB
+- Download & install **MongoDB** from [here](https://www.mongodb.com/try/download/community).
+- Start MongoDB server using:
+  ```bash
+  mongod --dbpath /path/to/data
+  ```
+- Use **MongoDB Compass** to create a database named **assignment3**.
 
-3. **Configuration:** 
-    * Create a `.env` file in the project root and add your MongoDB connection string: 
-        ```
-        MONGODB_URI=mongodb://<username>:<password>@<host>:<port>/<database_name>
-        ```
+### 2️⃣ Install Dependencies
+Make sure you have **Node.js** installed. Then, run:
+```bash
+npm install
+```
 
-4. **Run the Application:**
-    * Start the server: `npm start` 
+### 3️⃣ Start the Server
+Run the backend server:
+```bash
+node server.js
+```
 
-5. **Access the Application:**
-    * Open your web browser and visit `http://localhost:3000`
+### 4️⃣ Open the App
+Go to your browser and visit:
+```
+http://localhost:3000
+```
 
-**Usage:**
+---
 
-* **Create:** Add a new task by entering a description and optionally setting a due date and priority.
-* **Read:** View the list of tasks, including their status (completed/incomplete).
-* **Update:** Edit existing tasks by modifying their description, due date, priority, and marking them as completed.
-* **Delete:** Remove tasks from the list.
+## 🔧 Features
 
-**Testing:**
+### ✨ Core Features
+- **MongoDB Integration** for database storage.
+- **Full CRUD operations** (Create, Read, Update, Delete).
+- **User-friendly UI** with forms & tables.
 
-* Create, edit, and delete test tasks.
-* Mark tasks as completed and verify their status.
-* Test filtering and sorting tasks (e.g., by due date, priority).
+### 🎯 Additional Features
+✅ **Search Functionality** – Quickly find users by name or email.
+✅ **Data Filtering & Sorting** – Sort users by age, name, etc.
+✅ **Error Handling** – Alerts for database connection issues & invalid inputs.
 
+---
 
-**Enjoy!** ☕️
+## 🎮 How to Use
+
+### 📌 Add a User
+- Fill in the form and click **Submit**.
+- The user appears in the table instantly! 🎉
+
+### 📌 Edit a User
+- Click the ✏️ **Edit** button next to a user.
+- Update details and **save changes**.
+
+### 📌 Delete a User
+- Click the 🗑️ **Delete** button to remove a user.
+
+### 📌 Search & Filter
+- Use the **Search bar** to find specific users.
+- Click on column headers to **sort** data.
+
+---
+
+## 🛡️ Error Handling
+- Handles **invalid inputs** with user-friendly alerts.
+- Shows messages for **failed database connections**.
+- Prevents duplicate user entries.
+
+---

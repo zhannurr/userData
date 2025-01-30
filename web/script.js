@@ -1,5 +1,7 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
-  // Получить всех пользователей с сервера
+
   async function fetchUsers() {
     try {
       const response = await fetch('/users');
