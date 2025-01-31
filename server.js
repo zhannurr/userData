@@ -37,7 +37,7 @@ const User = mongoose.model('User', userSchema);
 app.get('/users', async (req, res) => {
   try {
     const users = await User.find();
-    res.json(users); // Send list of users as JSON
+    res.json(users);
   } catch (err) {
     res.status(500).send('Error fetching users');
   }

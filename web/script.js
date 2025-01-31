@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('/users');
       const users = await response.json();
       const userList = document.getElementById('user-list');
-      userList.innerHTML = ''; // Очистить текущий список
+      userList.innerHTML = '';
 
-      // Перерисовать список пользователей
+     
       users.forEach(user => {
         const userItem = document.createElement('div');
         userItem.classList.add('user-item');
@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         userList.appendChild(userItem);
       });
 
-      // Добавить обработчики для кнопок "удалить"
       const deleteButtons = document.querySelectorAll('.delete');
       deleteButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      // Добавить обработчики для кнопок "редактировать"
       const editButtons = document.querySelectorAll('.edit');
       editButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
@@ -47,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Добавить нового пользователя
   async function addUser(event) {
     event.preventDefault();
 
@@ -67,10 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ name, surname, age, email }),
       });
 
-      // Очистить форму
       document.getElementById('userForm').reset();
 
-      // Обновить список пользователей
       fetchUsers();
     } catch (error) {
       console.error('Error adding user:', error);
@@ -78,14 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   
-
-  // Обработчик формы
   const userForm = document.getElementById('userForm');
   if (userForm) {
     userForm.addEventListener('submit', addUser);
   }
 
-  // Инициализация списка пользователей
   fetchUsers();
 });
 
@@ -155,7 +147,6 @@ async function sortUsers() {
           `;
           userList.appendChild(userItem);
       });
-      // Добавить обработчики для кнопок "удалить"
       const deleteButtons = document.querySelectorAll('.delete');
       deleteButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
@@ -164,7 +155,6 @@ async function sortUsers() {
         });
       });
 
-      // Добавить обработчики для кнопок "редактировать"
       const editButtons = document.querySelectorAll('.edit');
       editButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
@@ -202,7 +192,6 @@ async function deleteUser(userId) {
       method: 'DELETE',
     });
 
-    // Удаляем элемент из DOM, чтобы сразу увидеть изменения
     document.querySelector(`.delete[data-id="${userId}"]`).closest('.user-item').remove();
   } catch (error) {
     console.error('Error deleting user:', error);
@@ -210,7 +199,6 @@ async function deleteUser(userId) {
 }
 
 
-// Редактировать пользователя
 async function editUser(userId) {
   const name = prompt('Enter the new first name:');
   const surname = prompt('Enter the new last name:');
@@ -242,7 +230,6 @@ async function editUser(userId) {
       body: JSON.stringify({ name, surname, age, email }),
     });
 
-    // Найди нужного пользователя в DOM и обнови его данные
     const userItem = document.querySelector(`.edit[data-id="${userId}"]`).closest('.user-item');
     if (userItem) {
       userItem.querySelector('span').innerHTML = `${name} ${surname}, Age: ${age}, Email: ${email}`;
