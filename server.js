@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -11,7 +12,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'web')));
 
 // MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/userDataApp', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -33,7 +34,6 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // Routes
-// Get all users
 app.get('/users', async (req, res) => {
   try {
     const users = await User.find();
@@ -43,7 +43,6 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// Create a new user
 app.post('/users', async (req, res) => {
   try {
     const { name, surname, age, email } = req.body;
@@ -61,7 +60,6 @@ app.post('/users', async (req, res) => {
   }
 });
 
-// Update a user's data
 app.put('/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -77,7 +75,6 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 
-// Delete a user
 app.delete('/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
