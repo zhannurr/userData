@@ -52,7 +52,7 @@ body {
 }
 
 .input-container button {
-    background-color: #4caf50; /* Green */
+    background-color: #a1d2a3; /* Green */
     color: white;
     border: none;
     border-radius: 50%;
@@ -110,3 +110,24 @@ section {
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
+#sort {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  #sort:hover {
+    border-color: #888;
+  }
+  
+  #sort:focus {
+    outline: none;
+    border-color: #555;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }

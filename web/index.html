@@ -22,7 +22,7 @@
                 <div class="input-container">
                     <input id="nameInput" type="text" placeholder="First Name" required>
                     <input id="surnameInput" type="text" placeholder="Last Name" required>
-                    <input id="ageInput" type="number" placeholder="Age" required>
+                    <input id="ageInput" type="number" placeholder="Age" required min="1" max="120">
                     <input id="emailInput" type="email" placeholder="Email" required>
                     <button type="submit">+</button>
                 </div>
@@ -32,10 +32,11 @@
         <section class="user-search">
             <h2>Search User by ID</h2>
             <form id="search-user-form">
-                    <label for="search-user-id">User ID:</label>
+                <div class="input-container">
                     <input type="text" id="search-user-id" class="form-control" placeholder="Enter user ID" required>
-
-                <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary">🔍</button>
+                </div>
+                    
             </form>
             <div id="search-result"></div>
         </section>

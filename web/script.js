@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
   async function fetchUsers() {
@@ -19,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div>
             <button class="edit" data-id="${user._id}">✏️</button>
             <button class="delete" data-id="${user._id}">🗑️</button>
+            <button class="copy-email" data-email="${user.email}">📋</button>
           </div>
         `;
 
@@ -78,44 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Удалить пользователя
-  async function deleteUser(userId) {
-    try {
-      await fetch(`/users/${userId}`, {
-        method: 'DELETE',
-      });
-      fetchUsers();
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  }
-
-  // Редактировать пользователя
-  async function editUser(userId) {
-    const name = prompt('Enter the new first name:');
-    const surname = prompt('Enter the new last name:');
-    const age = prompt('Enter the new age:');
-    const email = prompt('Enter the new email:');
-
-    if (!name || !surname || !age || !email) {
-      alert('All fields must be filled out');
-      return;
-    }
-
-    try {
-      await fetch(`/users/${userId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, surname, age, email }),
-      });
-
-      fetchUsers();
-    } catch (error) {
-      console.error('Error editing user:', error);
-    }
-  }
+  
 
   // Обработчик формы
   const userForm = document.getElementById('userForm');
@@ -187,6 +149,8 @@ async function sortUsers() {
               <div>
                   <button class="edit" data-id="${user._id}">✏️</button>
                   <button class="delete" data-id="${user._id}">🗑️</button>
+                  <button class="copy-email" data-email="${user.email}">📋</button>
+
               </div>
           `;
           userList.appendChild(userItem);
@@ -212,44 +176,78 @@ async function sortUsers() {
   } catch (error) {
       console.error('Error sorting users:', error);
   }
-  // Удалить пользователя
-  async function deleteUser(userId) {
-    try {
-      await fetch(`/users/${userId}`, {
-        method: 'DELETE',
-      });
-      fetchUsers();
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  }
-
-  // Редактировать пользователя
-  async function editUser(userId) {
-    const name = prompt('Enter the new first name:');
-    const surname = prompt('Enter the new last name:');
-    const age = prompt('Enter the new age:');
-    const email = prompt('Enter the new email:');
-
-    if (!name || !surname || !age || !email) {
-      alert('All fields must be filled out');
-      return;
-    }
-
-    try {
-      await fetch(`/users/${userId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, surname, age, email }),
-      });
-
-      fetchUsers();
-    } catch (error) {
-      console.error('Error editing user:', error);
-    }
-  }
-
 }
 
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('copy-email')) {
+    const email = event.target.getAttribute('data-email');
+    navigator.clipboard.writeText(email).then(() => {
+      alert(`Copied: ${email}`);
+    }).catch(err => console.error('Error copy:', err));
+  }
+});
+
+
+
+function emailValidator(email) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+}
+
+
+async function deleteUser(userId) {
+  try {
+    await fetch(`/users/${userId}`, {
+      method: 'DELETE',
+    });
+
+    // Удаляем элемент из DOM, чтобы сразу увидеть изменения
+    document.querySelector(`.delete[data-id="${userId}"]`).closest('.user-item').remove();
+  } catch (error) {
+    console.error('Error deleting user:', error);
+  }
+}
+
+
+// Редактировать пользователя
+async function editUser(userId) {
+  const name = prompt('Enter the new first name:');
+  const surname = prompt('Enter the new last name:');
+  const age = prompt('Enter the new age:');
+  const email = prompt('Enter the new email:');
+
+  if (!name || !surname || !age || !email) {
+    alert('All fields must be filled out');
+    return;
+  }
+  if (!(age>=1 || age<=120)){
+    alert('Input correct age')
+    return
+  }
+  
+
+  if (!emailValidator(email)) {
+      alert('Enter a valid email address');
+      return;
+  }
+
+
+  try {
+    await fetch(`/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, surname, age, email }),
+    });
+
+    // Найди нужного пользователя в DOM и обнови его данные
+    const userItem = document.querySelector(`.edit[data-id="${userId}"]`).closest('.user-item');
+    if (userItem) {
+      userItem.querySelector('span').innerHTML = `${name} ${surname}, Age: ${age}, Email: ${email}`;
+    }
+  } catch (error) {
+    console.error('Error editing user:', error);
+  }
+}
